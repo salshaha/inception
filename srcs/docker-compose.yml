@@ -76,9 +76,17 @@ volumes:
 
   mariadb_data:
     driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/salshaha/data/mysql
 
   wordpress_data:
     driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/salshaha/data/wordpress
 
 
 
