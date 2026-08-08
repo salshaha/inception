@@ -94,3 +94,6 @@ networks:
 
   inception:
     driver: bridge
+
+
+    #health check for mariadb && wordpress 

@@ -1,4 +1,5 @@
 FROM debian:bookworm
+
 RUN apt-get update && apt-get install -y \
     mariadb-server \
     mariadb-client \
@@ -8,8 +9,14 @@ RUN mkdir -p /run/mysqld && \
     chown -R mysql:mysql /run/mysqld
 
 COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
+
+# Fix MariaDB config permissions
+RUN chmod 644 /etc/mysql/mariadb.conf.d/50-server.cnf
+
 COPY tools/init.sh /usr/local/bin/init.sh
 
 RUN chmod +x /usr/local/bin/init.sh
 
-ENTRYPOINT ["/usr/local/bin/init.sh"]
+#ENTRYPOINT ["/usr/local/bin/init.sh"]
+
+CMD ["tail", "-f", "/dev/null"]
